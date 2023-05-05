@@ -22,8 +22,8 @@ import java.util.Map;
 public class ReadCSVFiles {
 
     public void compareCSVS() {
-        List<ApplicationGenParam> oracleRecords = readCSV("C:\\Users\\Lenovo\\Desktop\\application_gen_param_202305041426_oracle.csv");
-        List<ApplicationGenParam> postgresRecords = readCSV("C:\\Users\\Lenovo\\Desktop\\application_gen_param_202305041425_postgres.csv");
+        List<ApplicationGenParam> oracleRecords = readCSV("C:\\Users\\Asus\\Documents\\csvdata\\oracleData.csv");
+        List<ApplicationGenParam> postgresRecords = readCSV("C:\\Users\\Asus\\Documents\\csvdata\\postgresData.csv");
 
         ReportReponseDTO reportReponseDTO = new ReportReponseDTO();
 
@@ -110,7 +110,7 @@ public class ReadCSVFiles {
 
     public void generateExcels(ReportReponseDTO reportReponseDTO) {
         try {
-            FileOutputStream fileOutputStream = new FileOutputStream("C:\\Users\\Lenovo\\Desktop\\test3.xls");
+            FileOutputStream fileOutputStream = new FileOutputStream("C:\\Users\\Asus\\Documents\\csvdata\\test3.xls");
             writeHeaders();
             writeDataLines(reportReponseDTO);
             xssfWorkbook.write(fileOutputStream);

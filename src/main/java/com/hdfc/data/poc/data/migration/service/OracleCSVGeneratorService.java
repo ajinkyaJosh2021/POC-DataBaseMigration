@@ -1,5 +1,6 @@
 package com.hdfc.data.poc.data.migration.service;
 
+import com.hdfc.data.poc.data.migration.configuration.CustomMappingStrategy;
 import com.hdfc.data.poc.data.migration.oracle.entity.ApplicationGenParam;
 import com.hdfc.data.poc.data.migration.oracle.repository.OracleApplicationGenParamRepository;
 import com.opencsv.bean.StatefulBeanToCsv;
@@ -24,10 +25,16 @@ public class OracleCSVGeneratorService {
     private static final String fileName = "C:\\Users\\Asus\\Documents\\csvdata\\oracleData.csv";
     public void writeOracleDataToCSVFile() {
         List<ApplicationGenParam> data = oracleApplicationGenParamRepository.findAll();
+
+        CustomMappingStrategy<ApplicationGenParam> strategy = new CustomMappingStrategy<>();
+        strategy.setType(ApplicationGenParam.class);
+
         Writer writer = null;
         try {
             writer = new FileWriter(fileName);
-            StatefulBeanToCsv beanToCsv = new StatefulBeanToCsvBuilder(writer).build();
+            StatefulBeanToCsv beanToCsv = new StatefulBeanToCsvBuilder(writer)
+                    .withMappingStrategy(strategy)
+                    .build();
             beanToCsv.write(data);
             writer.close();
         } catch (IOException e) {

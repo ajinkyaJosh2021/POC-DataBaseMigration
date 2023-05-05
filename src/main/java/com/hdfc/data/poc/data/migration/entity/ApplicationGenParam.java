@@ -4,9 +4,6 @@ package com.hdfc.data.poc.data.migration.entity;
 import com.opencsv.bean.CsvBindByPosition;
 
 import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
-import java.sql.Timestamp;
-import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,6 +13,7 @@ public class ApplicationGenParam {
     //ApplicationGenParamPK applicationGenParamPK;
 
     @CsvBindByPosition(position = 0)
+
     private String paramKey;
 
     //@Column(name = "SUB_PARAM_KEY")
@@ -28,7 +26,7 @@ public class ApplicationGenParam {
 
     //@GeneratedValue(strategy = GenerationType.AUTO)
     @CsvBindByPosition(position = 10)
-    private Long id;
+    private String id;
 
     //@Column(name = "PARAM_DESC")
     @CsvBindByPosition(position = 14)
@@ -42,7 +40,7 @@ public class ApplicationGenParam {
     //@Column(name = "STATUS")
 
     @CsvBindByPosition(position = 18)
-    private Character status;
+    private String status;
 
     //@Column(name = "MODIFIED_BY")
 
@@ -52,7 +50,7 @@ public class ApplicationGenParam {
     //@Column(name = "MODIFIED_DT")
 
     @CsvBindByPosition(position = 13)
-    private Timestamp modifiedDate;
+    private String modifiedDate;
 
     //@Column(name = "CREATED_BY")
 
@@ -62,12 +60,12 @@ public class ApplicationGenParam {
     //@Column(name = "CREATED_DT")
 
     @CsvBindByPosition(position = 6)
-    private Timestamp createdDate;
+    private String createdDate;
 
     //@Column(name = "MIG_DAT")
 
     @CsvBindByPosition(position = 11)
-    private Timestamp migDate;
+    private String migDate;
 
     //@Column(name = "REQ_NO")
 
@@ -113,14 +111,15 @@ public class ApplicationGenParam {
     public ApplicationGenParam() {
     }
 
+
     public List<String> compareTo(ApplicationGenParam applicationGenParam) {
         List<String> response = new ArrayList<>();
         Field[] fields = ApplicationGenParam.class.getDeclaredFields();
 
         for (Field field : fields) {
             try {
-                String line6 = (String)( field.get(applicationGenParam) != null ? field.get(applicationGenParam).toString():null);
-                String line5 = (String)(field.get(this)!= null ? field.get(this).toString():null);
+                String line6 = (String) (field.get(applicationGenParam) != null ? field.get(applicationGenParam).toString() : null);
+                String line5 = (String) (field.get(this) != null ? field.get(this).toString() : null);
 
                 if (line6 == null && line5 != null) {
                     response.add(new String("Line 6 " + field.getName() + " column is empty"));

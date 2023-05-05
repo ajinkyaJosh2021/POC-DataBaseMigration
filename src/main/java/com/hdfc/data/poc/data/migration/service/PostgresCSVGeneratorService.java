@@ -1,7 +1,6 @@
 package com.hdfc.data.poc.data.migration.service;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.hdfc.data.poc.data.migration.configuration.CustomMappingStrategy;
 import com.hdfc.data.poc.data.migration.postgres.entity.ApplicationGenParam;
 import com.hdfc.data.poc.data.migration.postgres.repository.PostgresApplicationGenParamRepository;
 import com.opencsv.bean.StatefulBeanToCsv;
@@ -25,13 +24,16 @@ public class PostgresCSVGeneratorService {
 
     public void writePostgresDataToCSVFile() {
         List<ApplicationGenParam> data = postgresApplicationGenParamRepository.findAll();
-        ObjectMapper mapper = new ObjectMapper();
-        List l = mapper.convertValue(data, new TypeReference<List>() {});
+
+        CustomMappingStrategy<ApplicationGenParam> strategy = new CustomMappingStrategy<>();
+        strategy.setType(ApplicationGenParam.class);
 
         Writer writer = null;
         try {
             writer = new FileWriter(fileName);
-            StatefulBeanToCsv beanToCsv = new StatefulBeanToCsvBuilder(writer).build();
+            StatefulBeanToCsv beanToCsv = new StatefulBeanToCsvBuilder(writer)
+                    .withMappingStrategy(strategy)
+                    .build();
             beanToCsv.write(data);
             writer.close();
         } catch (IOException e) {
