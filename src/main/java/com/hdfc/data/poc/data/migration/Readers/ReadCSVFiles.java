@@ -8,16 +8,17 @@ import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFFont;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@Service
 public class ReadCSVFiles {
 
     public void compareCSVS() {
@@ -109,7 +110,7 @@ public class ReadCSVFiles {
 
     public void generateExcels(ReportReponseDTO reportReponseDTO) {
         try {
-            FileOutputStream fileOutputStream = new FileOutputStream("C:\\Users\\Lenovo\\Desktop\\test2.xls");
+            FileOutputStream fileOutputStream = new FileOutputStream("C:\\Users\\Lenovo\\Desktop\\test3.xls");
             writeHeaders();
             writeDataLines(reportReponseDTO);
             xssfWorkbook.write(fileOutputStream);
