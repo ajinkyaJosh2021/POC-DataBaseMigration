@@ -12,7 +12,9 @@ public class CompareDataController {
     private ReadCSVFiles readCSVFiles;
 
     @RequestMapping("/compareCSV")
-    public void compareCSV(){
+    public String compareCSV(){
+
         readCSVFiles.compareCSVS();
+        return "Comparission Completed";
     }
 }

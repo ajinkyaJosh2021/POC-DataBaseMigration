@@ -1,5 +1,6 @@
 package com.hdfc.data.poc.data.migration.postgres.entity;
 
+
 import lombok.*;
 
 import javax.persistence.*;
@@ -12,10 +13,10 @@ import java.sql.Timestamp;
 @Getter
 @Setter
 @ToString
-public class ApplicationGenParam {
+public class  ApplicationGenParam {
 
-    @Id
-    Long applicationGenParamPK;
+    @EmbeddedId
+    ApplicationGenParamPK applicationGenParamPK;
 
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -69,13 +70,7 @@ public class ApplicationGenParam {
     private String cacheRequired;
 
 
-    public ApplicationGenParam(Long applicationGenParamPK, String paramDescription, String modifiedBy, Timestamp modifiedDate, String createdBy, Timestamp createdDate, String paramType) {
-        this.applicationGenParamPK = applicationGenParamPK;
-        this.paramDescription = paramDescription;
-        this.modifiedBy = modifiedBy;
-        this.modifiedDate = modifiedDate;
-        this.createdBy = createdBy;
-        this.createdDate = createdDate;
-        this.paramType = paramType;
-    }
+
+
+
 }

@@ -13,7 +13,7 @@ public class OracleDbTestController {
 
     @GetMapping("/generate-oracle-db-csv")
     public ResponseEntity generateCSV() {
-        service.writeOracleDataToCSVFile();
+        service.writeOracleDataToCSVFile("com.hdfc.data.poc.data.migration.oracle.entity");
         return ResponseEntity.ok().body("created");
     }
 }

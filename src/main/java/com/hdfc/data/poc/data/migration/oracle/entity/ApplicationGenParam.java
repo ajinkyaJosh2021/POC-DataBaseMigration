@@ -15,10 +15,17 @@ import java.sql.Timestamp;
 public class ApplicationGenParam {
 
     @Id
-    Long applicationGenParamPK;
-
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(name = "PARAM_KEY")
+    private String paramKey;
+
+    @Column(name = "SUB_PARAM_KEY")
+    private String subParamKey;
+
+    @Column(name = "PARAM_VALUE")
+    private String paramValue;
 
     @Column(name = "PARAM_DESC")
     private String paramDescription;
@@ -67,15 +74,4 @@ public class ApplicationGenParam {
 
     @Column(name = "CACHE_REQUIRED")
     private String cacheRequired;
-
-
-    public ApplicationGenParam(Long applicationGenParamPK, String paramDescription, String modifiedBy, Timestamp modifiedDate, String createdBy, Timestamp createdDate, String paramType) {
-        this.applicationGenParamPK = applicationGenParamPK;
-        this.paramDescription = paramDescription;
-        this.modifiedBy = modifiedBy;
-        this.modifiedDate = modifiedDate;
-        this.createdBy = createdBy;
-        this.createdDate = createdDate;
-        this.paramType = paramType;
-    }
 }

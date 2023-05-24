@@ -8,7 +8,7 @@ public class ReportReponseDTO {
     private String tableName;
     private String lineFiveRowCount;
     private String lineSixRowCount;
-    private Map<String,List<String>> dataIssues;
+    private Map<Integer,List<ErrorDTO>> dataIssues;
 
     public String getTableName() {
         return tableName;
@@ -34,11 +34,11 @@ public class ReportReponseDTO {
         this.lineSixRowCount = lineSixRowCount;
     }
 
-    public Map<String, List<String>> getDataIssues() {
+    public Map<Integer, List<ErrorDTO>> getDataIssues() {
         return dataIssues;
     }
 
-    public void setDataIssues(Map<String, List<String>> dataIssues) {
+    public void setDataIssues(Map<Integer, List<ErrorDTO>> dataIssues) {
         this.dataIssues = dataIssues;
     }
 }
