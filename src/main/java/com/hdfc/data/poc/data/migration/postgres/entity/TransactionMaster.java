@@ -12,7 +12,7 @@ import javax.persistence.Table;
 import java.sql.Timestamp;
 
 @Entity
-@Table(name = "MST_IATXN")
+@Table(name = "MST_IATXN",schema = "hdfc")
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter

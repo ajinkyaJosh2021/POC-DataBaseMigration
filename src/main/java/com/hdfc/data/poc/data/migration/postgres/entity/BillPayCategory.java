@@ -22,7 +22,7 @@ public class BillPayCategory {
     private BillPayCategoryPK billPayCategoryPK;
 
     @Column(name = "BILL_PAY_CATEGORY_SEQ")
-    private int billPayCategorySeq;
+    private Integer billPayCategorySeq;
 
     @Column(name = "ICON_URL_NB")
     private String iconUrlNb;

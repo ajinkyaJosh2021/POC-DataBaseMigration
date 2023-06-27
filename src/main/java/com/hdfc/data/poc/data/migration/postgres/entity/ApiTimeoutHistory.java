@@ -8,7 +8,7 @@ import javax.persistence.*;
 import java.sql.Timestamp;
 
 @Entity
-@Table(name = "API_TIMEOUT_HISTORY")
+@Table(name = "API_TIMEOUT_HISTORY",schema = "hdfc")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

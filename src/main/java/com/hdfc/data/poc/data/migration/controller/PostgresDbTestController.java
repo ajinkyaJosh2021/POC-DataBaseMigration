@@ -21,14 +21,5 @@ public class PostgresDbTestController {
         return ResponseEntity.ok().body("created");
     }
 
-    @CrossOrigin(origins = "http://localhost:4200")
-    @GetMapping("/users")
-    public ResponseEntity getDummmyUsers() {
-        Map<String,String> map = new HashMap<>();
-        map.put("ajinkya","a@gmail.com");
-        map.put("vijay","v@gmail.com");
-        map.put("sai","s@gmail.com");
-        return ResponseEntity.ok().body(map);
-    }
 }
 

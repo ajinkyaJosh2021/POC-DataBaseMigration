@@ -10,7 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "TXN_MASTER")
+@Table(name = "TXN_MASTER",schema = "hdfc")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

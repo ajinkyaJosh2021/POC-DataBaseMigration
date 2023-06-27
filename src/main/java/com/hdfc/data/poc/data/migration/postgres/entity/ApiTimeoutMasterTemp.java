@@ -9,13 +9,13 @@ import java.sql.Timestamp;
 
 @Data
 @Entity
-@Table(name = "API_TIMEOUT_MASTER_TMP")
+@Table(name = "API_TIMEOUT_MASTER_TMP",schema = "hdfc")
 @AllArgsConstructor
 @NoArgsConstructor
 public class ApiTimeoutMasterTemp {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
 

@@ -13,7 +13,7 @@ import java.sql.Timestamp;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "APPLICATION_GEN_PARAM_HISTORY")
+@Table(name = "APPLICATION_GEN_PARAM_HISTORY",schema = "hdfc")
 public class ApplicationGenParamHistory {
 
     @Id
