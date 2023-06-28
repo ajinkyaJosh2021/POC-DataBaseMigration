@@ -9,7 +9,7 @@ import java.sql.Timestamp;
 
 @Data
 @Entity
-@Table(name = "API_TIMEOUT_MASTER")
+@Table(name = "API_TIMEOUT_MASTER",schema = "hdfc")
 @AllArgsConstructor
 @NoArgsConstructor
 public class ApiTimeoutMaster {

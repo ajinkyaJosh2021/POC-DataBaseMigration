@@ -9,7 +9,7 @@ import javax.persistence.Table;
 
 @Entity
 @Data
-@Table(name = "DYNAMIC_AUTH_MODEL")
+@Table(name = "DYNAMIC_AUTH_MODEL",schema = "hdfc")
 public class AuthenticationEntityMap {
 
     @EmbeddedId
