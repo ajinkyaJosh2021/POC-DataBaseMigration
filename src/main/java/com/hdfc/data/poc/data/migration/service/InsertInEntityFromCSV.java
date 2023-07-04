@@ -1,6 +1,10 @@
 package com.hdfc.data.poc.data.migration.service;
 
 
+import com.hdfc.data.poc.data.migration.DTO.AppGenMaintenanceDTO;
+import com.hdfc.data.poc.data.migration.mapper.AppGenParamFieldMapper;
+import com.hdfc.data.poc.data.migration.mapper.EntityMapper;
+import com.hdfc.data.poc.data.migration.postgres.entity.ApplicationGenParam;
 import com.hdfc.data.poc.data.migration.postgres.repository.GenericPostgresRepository;
 import com.opencsv.CSVReader;
 import org.slf4j.Logger;
@@ -25,14 +29,20 @@ import java.util.stream.Stream;
 
 @Service
 public class InsertInEntityFromCSV {
+
+    public static final String POSTGRES_BASE_PACKAGE = "com.hdfc.data.poc.data.migration.postgres.entity.";
+
     @Autowired
     GenericPostgresRepository genericPostgresRepository;
+
+    @Autowired
+    private PublisherService publisherService;
     @Autowired
     @Qualifier(value = "threadPool")
     ThreadPoolExecutor threadPoolExecutor;
 
     public void insertIntoEntityFromCSV(){
-        File directory = new File("C:\\Users\\Lenovo\\Desktop\\files_for_db\\test");
+        File directory = new File("/home/josh/Desktop/csv");
         if(directory.isDirectory()){
             File[] files = directory.listFiles();
             for(File file : files){
@@ -57,7 +67,7 @@ class ExecuteInsertOperation implements Runnable{
         try {
             BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
             CSVReader csvReader = new CSVReader(bufferedReader);
-            Class cls =  Class.forName("com.hdfc.data.poc.data.migration.postgres.entity."+file.getName().replace(".csv",""));
+            Class cls =  Class.forName(InsertInEntityFromCSV.POSTGRES_BASE_PACKAGE + EntityMapper.getEntityNameFromCsvName(file.getName().replace(".csv","")));
 
             String headerLine =  bufferedReader.readLine();
             if(headerLine==null)
@@ -67,8 +77,9 @@ class ExecuteInsertOperation implements Runnable{
 
             List<Field> headers= new ArrayList<>();
             Field[] fieldArr = cls.getDeclaredFields();
+            AppGenMaintenanceDTO appGenMaintenanceDTO;
             for(String str : header.split(",")){
-                Field field =  searchField(fieldArr,str.toLowerCase());
+                Field field =  searchField(fieldArr,str.toLowerCase(), cls);
                 if(field == null)
                     throw new NoSuchMethodException("No Such field " + str);
                 headers.add(field);
@@ -76,7 +87,7 @@ class ExecuteInsertOperation implements Runnable{
 
             Table table = (Table) cls.getDeclaredAnnotation(Table.class);
 
-            StringBuilder  query = new StringBuilder("Insert into hdfc.").append(table.name()).append("(");
+            StringBuilder  query = new StringBuilder("Insert into ").append(table.name()).append("(");
 
             query.append( headers.stream().map(field -> {
                 Column column =  field.getAnnotation(Column.class);
@@ -104,6 +115,10 @@ class ExecuteInsertOperation implements Runnable{
                         {
                             query.append("'").append(arr[i]).append("'");
                         }
+                        else if (dataType.getTypeName().equals(Long.class.getTypeName())
+                                || dataType.getTypeName().equals(Integer.class.getTypeName())) {
+                            query.append(arr[i]);
+                        }
                         else{
                             Constructor constructor =  dataType.getDeclaredConstructor(String.class);
                             constructor.setAccessible(true);
@@ -121,6 +136,10 @@ class ExecuteInsertOperation implements Runnable{
                         log.error("In  IllegalAccessException  ",e);
                     }
                 }
+
+                appGenMaintenanceDTO = new AppGenMaintenanceDTO(arr[1], arr[2], arr[3], arr[4], arr[14], arr[17], arr[16], arr[18]);
+
+
                 query.replace(query.length()-1,query.length(),"");
                 query.append("),");
                 arr =  csvReader.readNext();
@@ -132,10 +151,13 @@ class ExecuteInsertOperation implements Runnable{
             log.error("Exception : " + e);
         }
     }
-    private Field searchField(Field[] fields , String fieldName){
+    private Field searchField(Field[] fields , String fieldName, Class cls){
         for(Field field : fields){
-            if(field.getName().toLowerCase().equals(fieldName))
-                return field;
+            switch (cls.getName()) {
+                case (InsertInEntityFromCSV.POSTGRES_BASE_PACKAGE + "ApplicationGenParam"):
+                    if(field.getName().equalsIgnoreCase(AppGenParamFieldMapper.getEntityFieldName(fieldName)))
+                        return field;
+            }
         }
         return null;
     }

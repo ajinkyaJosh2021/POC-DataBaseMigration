@@ -79,17 +79,17 @@ public class ApplicationGenParamHistory {
     private String cacheRequired;
 
 
-    public ApplicationGenParamHistory(ApplicationGenParam applicationGenParam, String requestNo){
-        this.paramKey = applicationGenParam.applicationGenParamPK.getParamKey();
-        this.subParamKey = applicationGenParam.applicationGenParamPK.getSubParamKey();
-        this.paramValue = applicationGenParam.applicationGenParamPK.getParamValue();
-        this.paramDescription = applicationGenParam.getParamDescription();
-        this.modifiedBy = applicationGenParam.getModifiedBy();
-        this.modifiedDate = applicationGenParam.getModifiedDate();
-        this.createdBy = applicationGenParam.getCreatedBy();
-        this.createdDate = applicationGenParam.getCreatedDate();
-        this.migDate = applicationGenParam.getMigDate();
-        this.paramType = applicationGenParam.getParamType();
-        this.requestNo = requestNo;
-    }
+//    public ApplicationGenParamHistory(ApplicationGenParam applicationGenParam, String requestNo){
+//        this.paramKey = applicationGenParam.applicationGenParamPK.getParamKey();
+//        this.subParamKey = applicationGenParam.applicationGenParamPK.getSubParamKey();
+//        this.paramValue = applicationGenParam.applicationGenParamPK.getParamValue();
+//        this.paramDescription = applicationGenParam.getParamDescription();
+//        this.modifiedBy = applicationGenParam.getModifiedBy();
+//        this.modifiedDate = applicationGenParam.getModifiedDate();
+//        this.createdBy = applicationGenParam.getCreatedBy();
+//        this.createdDate = applicationGenParam.getCreatedDate();
+//        this.migDate = applicationGenParam.getMigDate();
+//        this.paramType = applicationGenParam.getParamType();
+//        this.requestNo = requestNo;
+//    }
 }

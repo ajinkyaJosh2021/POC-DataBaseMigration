@@ -45,5 +45,13 @@ public class PubSubLogsMaster {
     public PubSubLogsMaster() {
     }
 
+    public PubSubLogsMaster(String topic, String eventId, String eventType, Map<String, Object> payload) {
+        this.topic = topic;
+        this.eventId = eventId;
+        this.eventType = eventType;
+        this.payload = payload;
+        this.createdDate = new Timestamp(System.currentTimeMillis());
+        this.publishStatus = "N";
+    }
 
 }

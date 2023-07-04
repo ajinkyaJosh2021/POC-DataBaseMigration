@@ -12,7 +12,7 @@ import java.sql.Timestamp;
 
 @Data
 @Entity
-@Table(name = "ALERTS_TEMPLATE",schema = "hdfc")
+@Table(name = "ALERTS_TEMPLATE")
 @AllArgsConstructor
 @NoArgsConstructor
 public class AlertsTemplate {
